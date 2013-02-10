@@ -33,7 +33,7 @@ public class DragNDrop : MonoBehaviour {
                     if (hit.collider.gameObject == gameObject) {
 
                         selected = true;
-
+						collider.enabled = false;
                     }
 
                 }
@@ -41,12 +41,12 @@ public class DragNDrop : MonoBehaviour {
             } else if (touch.phase == TouchPhase.Moved) {
 
                 if (selected == true) {
-
+					collider.enabled = false;
 
 					if(!rotate){
 				    	Vector3 curScreenPoint = new Vector3(touch.position.x, touch.position.y, 1);
 					    Vector3 curPosition = Camera.main.ScreenToWorldPoint(curScreenPoint);
-				   	    transform.position = new Vector3( curPosition.x, curPosition.y, 1);
+				   	    transform.position = new Vector3( curPosition.x, curPosition.y+50, 1);
 					}
 					else{
 				    	Vector3 curScreenPoint = new Vector3(Input.GetTouch(1).position.x, Input.GetTouch(1).position.y, 1);
@@ -68,7 +68,7 @@ public class DragNDrop : MonoBehaviour {
                 }
 
             } else if (touch.phase == TouchPhase.Ended) {
-
+				collider.enabled = true;
                 selected = false;
 
             }			
