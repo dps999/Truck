@@ -12,28 +12,29 @@ public class DragNDrop : MonoBehaviour {
 	private Quaternion toRotation;
 	Transform cachedTransform;
 	Vector3 startingPos;
+	public Transform COM;
 	// Use this for initialization
 	void Start () {
-	
+	//	rigidbody.centerOfMass = COM.localPosition;
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
 		RaycastHit hit = new RaycastHit();
- 		int fingerCount = 0;
+ 	//	int fingerCount = 0;
         foreach (Touch touch in Input.touches) {
 			int tapCount = Input.touchCount;
 			if(tapCount > 1) rotate = true;
 			else rotate = false;
 			Ray ray = Camera.main.ScreenPointToRay(touch.position);
 			if (touch.phase == TouchPhase.Began) {
-
+				gameObject.collider.isTrigger = true;
                 if (Physics.Raycast(ray, out hit, 100)) {
 
                     if (hit.collider.gameObject == gameObject) {
-
+						gameObject.collider.isTrigger = true;
                         selected = true;
-						collider.enabled = false;
+
                     }
 
                 }
@@ -41,7 +42,7 @@ public class DragNDrop : MonoBehaviour {
             } else if (touch.phase == TouchPhase.Moved) {
 
                 if (selected == true) {
-					collider.enabled = false;
+					gameObject.collider.isTrigger = true;
 
 					if(!rotate){
 				    	Vector3 curScreenPoint = new Vector3(touch.position.x, touch.position.y, 1);
@@ -68,7 +69,7 @@ public class DragNDrop : MonoBehaviour {
                 }
 
             } else if (touch.phase == TouchPhase.Ended) {
-				collider.enabled = true;
+				gameObject.collider.isTrigger = false;
                 selected = false;
 
             }			
