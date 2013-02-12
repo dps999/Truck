@@ -14,17 +14,4 @@ public class Click : MonoBehaviour {
 	
 	}
 	
-	 void OnGUI() {
-
-        
-        if (GUI.Button(new Rect(10, 450, 50, 30), "GO!")){
-			GameObject truck = GameObject.FindGameObjectWithTag("Truck");
-			truck.GetComponent<CarController>().accel = -0.05f;
-			GameObject leftBorder = GameObject.Find("Left");
-			leftBorder.renderer.enabled = false;
-			leftBorder.collider.enabled = false;
-		}
-         
-        
-    }
 }

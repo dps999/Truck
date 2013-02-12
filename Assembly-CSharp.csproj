@@ -47,6 +47,7 @@
      <Compile Include="Assets\Scripts\CarController.cs" />
      <Compile Include="Assets\Scripts\Click.cs" />
      <Compile Include="Assets\Scripts\DragNDrop.cs" />
+     <Compile Include="Assets\Scripts\SelectedObject.cs" />
      <Compile Include="Assets\Scripts\TruckScript.cs" />
      <Compile Include="Assets\Scripts\backButton.cs" />
      <Compile Include="Assets\Scripts\touching.cs" />

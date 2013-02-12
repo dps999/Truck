@@ -15,11 +15,13 @@ public class DragNDrop : MonoBehaviour {
 	public Transform COM;
 	// Use this for initialization
 	void Start () {
+		
 	//	rigidbody.centerOfMass = COM.localPosition;
 	}
 	
 	// Update is called once per frame
 	void FixedUpdate () {
+		if(selected) Camera.main.GetComponent<SelectedObject>().selectedObject = gameObject;
 		RaycastHit hit = new RaycastHit();
  	//	int fingerCount = 0;
         foreach (Touch touch in Input.touches) {
@@ -29,6 +31,7 @@ public class DragNDrop : MonoBehaviour {
 			Ray ray = Camera.main.ScreenPointToRay(touch.position);
 			if (touch.phase == TouchPhase.Began) {
 				gameObject.collider.isTrigger = true;
+				renderer.material.color = Color.yellow;
                 if (Physics.Raycast(ray, out hit, 100)) {
 
                     if (hit.collider.gameObject == gameObject) {
@@ -77,14 +80,14 @@ public class DragNDrop : MonoBehaviour {
 	}
 	
 	
-/*	void OnMouseDown()
+	void OnMouseDown()
 	{
-		Vector3 scanPos = Input.mousePosition;
-	    screenPoint = Camera.main.WorldToScreenPoint(scanPos);
+		selected = true;
+		//renderer.material.color = Color.yellow;
 	 
 	   // offset = scanPos - Camera.main.ScreenToWorldPoint(
 	   //    new Vector3(Input.mousePosition.x, Input.mousePosition.y, 1));
-	}*/
+	}
  
  
 	void OnMouseDrag()
@@ -99,5 +102,10 @@ public class DragNDrop : MonoBehaviour {
 				      //  transform.rotation = Quaternion.Lerp(fromRotation,toRotation,Time.deltaTime *5);
 	//	transform.Rotate(0,0,xDeg/1000);
 	    transform.position = new Vector3( curPosition.x, curPosition.y, 1);
+	}
+	
+	void OnMouseUp()
+	{
+		selected = false;
 	}
 }
